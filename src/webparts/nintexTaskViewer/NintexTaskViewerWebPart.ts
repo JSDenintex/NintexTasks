@@ -70,12 +70,16 @@ export default class NintexTaskViewerWebPart extends BaseClientSideWebPart<INint
       this.properties.description = this.properties.description || '';
   
       // Default assignee to current user's email
-      if (this.properties.assigneeEmail) {
-        this.properties.assignee = this.properties.assigneeEmail;
-      } else {
-        this.properties.assignee = this.properties.assignee || this.context.pageContext.user.email;
-      }
-  
+      //if (this.properties.assigneeEmail) {
+      //  console.log("Using assigneeEmail input value:", this.properties.assigneeEmail);
+      //  this.properties.assignee = this.properties.assigneeEmail;
+      //} else {
+      //  console.log("Using default/context user email:", this.context.pageContext.user.email);
+      //  this.properties.assignee = this.properties.assignee || this.context.pageContext.user.email;
+      //}
+
+      this.properties.assigneeEmail = this.properties.assigneeEmail || 'jake.dennison@nintex.com';
+
       // Default date range to last 90 days
       const currentDate = new Date();
       this.properties.from = this.properties.from || new Date(currentDate.setDate(currentDate.getDate() - 90)).toISOString();
@@ -99,13 +103,18 @@ export default class NintexTaskViewerWebPart extends BaseClientSideWebPart<INint
     }
   }
 
-  private handleAssigneeEmailChange(event: Event): void {
-    this.properties.assigneeEmail = (event.target as HTMLInputElement).value;
-  }
-
   private handleAssigneeChange(event: Event): void {
     const selectedValue = (event.target as HTMLSelectElement).value;
     this.properties.assignee = selectedValue === 'MyTasks' ? this.context.pageContext.user.email : '';
+  }
+
+  //private handleAssigneeEmailChange(event: Event): void {
+  //  console.log("Assignee email input changed:", event);
+  //  this.properties.assigneeEmail = (event.target as HTMLInputElement).value;
+  //}
+
+  private handleAssigneeEmailChange(event: Event): void {
+    this.properties.assigneeEmail = (event.target as HTMLInputElement).value;
   }
   
   private handleDateRangeChange(event: Event): void {
