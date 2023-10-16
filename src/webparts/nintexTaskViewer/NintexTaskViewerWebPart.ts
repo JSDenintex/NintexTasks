@@ -24,6 +24,7 @@ export interface INintexTaskViewerWebPartProps {
   workflowName: string;
   clientId: string;
   clientSecret: string;
+  assigneeEmail: string;
 }
 
 interface ITaskAssignment {
@@ -69,7 +70,11 @@ export default class NintexTaskViewerWebPart extends BaseClientSideWebPart<INint
       this.properties.description = this.properties.description || '';
   
       // Default assignee to current user's email
-      this.properties.assignee = this.properties.assignee || this.context.pageContext.user.email;
+      if (this.properties.assigneeEmail) {
+        this.properties.assignee = this.properties.assigneeEmail;
+      } else {
+        this.properties.assignee = this.properties.assignee || this.context.pageContext.user.email;
+      }
   
       // Default date range to last 90 days
       const currentDate = new Date();
@@ -92,6 +97,10 @@ export default class NintexTaskViewerWebPart extends BaseClientSideWebPart<INint
     if (element) {
         element.addEventListener(event, handler);
     }
+  }
+
+  private handleAssigneeEmailChange(event: Event): void {
+    this.properties.assigneeEmail = (event.target as HTMLInputElement).value;
   }
 
   private handleAssigneeChange(event: Event): void {
@@ -199,6 +208,9 @@ export default class NintexTaskViewerWebPart extends BaseClientSideWebPart<INint
       <h2>Task Filters</h2>
       <div class="filterBar">
         <div>
+          Assignee: <input type="email" id="assigneeEmailInput" value="${this.properties.assigneeEmail}">
+        </div>
+        <div>
           Task View: 
           <select id="assigneeDropdown">
             <option selected value="MyTasks">My Tasks</option>
@@ -237,7 +249,7 @@ export default class NintexTaskViewerWebPart extends BaseClientSideWebPart<INint
   `;
   
   
-
+  this.safelyAttachEventListener('#assigneeEmailInput', 'input', this.handleAssigneeEmailChange.bind(this));
   this.safelyAttachEventListener('#assigneeDropdown', 'change', this.handleAssigneeChange.bind(this));
   this.safelyAttachEventListener('#dateRangeDropdown', 'change', this.handleDateRangeChange.bind(this));
   this.safelyAttachEventListener('#statusDropdown', 'change', this.handleStatusChange.bind(this));
