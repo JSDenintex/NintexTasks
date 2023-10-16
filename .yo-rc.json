@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": false,
+    "nodeVersion": "18.12.1",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.9.1"
+    },
+    "version": "1.17.4",
+    "libraryName": "nintex-tasks",
+    "libraryId": "771656f1-5182-41ea-b27c-38e9a4bf8564",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "nintex-tasks",
+    "solutionShortDescription": "nintex-tasks description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
