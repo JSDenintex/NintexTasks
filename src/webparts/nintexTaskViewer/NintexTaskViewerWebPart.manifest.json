@@ -18,11 +18,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
     "group": { "default": "Advanced" },
-    "title": { "default": "NintexTaskViewer" },
-    "description": { "default": "NintexTaskViewer description" },
-    "officeFabricIconFontName": "Page",
+    "title": { "default": "Nintex Tasks" },
+    "description": { "default": "Display Nintex Automation Cloud Tasks" },
+    "officeFabricIconFontName": "TaskList",
     "properties": {
-      "description": "NintexTaskViewer"
+      "description": "Nintex Tasks"
     }
   }]
 }

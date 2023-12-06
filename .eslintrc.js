@@ -346,7 +346,10 @@ module.exports = {
         '**/test/*.ts',
         '**/test/*.tsx'
       ],
-      rules: {}
+      "rules": {
+        "@rushstack/no-new-null": "warn",
+        "@typescript-eslint/no-explicit-any": "warn"
+      }
     }
   ]
 };

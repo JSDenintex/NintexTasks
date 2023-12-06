@@ -3,57 +3,10 @@
 .nintexTaskViewer {
   overflow: hidden;
   padding: 1em;
-  color: "[theme:bodyText, default: #323130]";
   color: var(--bodyText);
+  
   &.teams {
     font-family: $ms-font-family-fallbacks;
-  }
-}
-
-.welcome {
-  text-align: center;
-}
-
-.welcomeImage {
-  width: 100%;
-  max-width: 420px;
-}
-
-.links {
-  a {
-    text-decoration: none;
-    color: "[theme:link, default:#03787c]";
-    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
-
-    &:hover {
-      text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
-      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
-    }
-  }
-}
-
-.nintexTaskViewer {
-  .filterBar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; // vertically center items
-    flex-wrap: wrap; // allow items to wrap if needed
-
-    > div {
-      display: flex; // so that the label and dropdown/select are in line
-      align-items: center; // vertically center items within each filter group
-      flex-grow: 1; // allow each filter item to grow
-      margin-right: 20px; // space between filter items
-
-      &:last-child {
-        margin-right: 0; // remove margin from the last filter item
-      }
-
-      select, input[type="text"] {
-        margin-left: 10px; // space between label and dropdown/input
-      }
-    }
   }
 
   font-family: Arial, sans-serif;
@@ -77,26 +30,270 @@
     }
   }
 
-  .filterBar {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-
-    div {
-      margin-right: 10px;
-    }
-  }
-
-  button {
+  button,
+  .outcomeButton {
     padding: 8px 15px;
-    background-color: #0078d4;
     color: white;
     border: none;
+    border-radius: 3px;
     cursor: pointer;
     transition: background-color 0.3s;
+    background-color: #0078d4;
+    &:hover {
+      background-color: #005A9E;
+    }
+    margin-left: 7px;
+  }
+
+  .filterGroup {
+    background-color: #f6f6f6;
+    border-radius: 5px;
+
+    .filterBar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between; // This helps in spacing the children nicely
+      padding: 1em;
+      gap: 1em;
+
+      .filterItem {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1;  // Allow the items to grow
+        min-width: 12%; // This ensures a minimum width, but adjust based on your preference
+        
+        label {
+          margin-bottom: 0.5em;
+        }
+
+        select.filterDropdown{
+          width: 100%;
+          padding: 0.5em;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+        }
+
+        input[type="email"],
+        input.filterInput {
+          width: calc(100% - 1em);
+          padding: 0.5em;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
+.tasksContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Vertically center-align the h2 and button */
+
+  button {
+    flex-shrink: 0;  // This ensures the button doesn't shrink beyond its content size
+    padding: 0.5em 1em;
+    border: none;
+    background-color: #0078d4;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 3px;
 
     &:hover {
       background-color: #005a9e;
     }
   }
+
+}
+
+/* Task items */
+.noTasksFound {
+  text-align: center;
+}
+
+.taskItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.taskItem {
+  flex-basis: calc(100%); 
+  padding: 1em;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.taskHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.openButton {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.taskBody {
+  border: 1px solid #ddd;
+  margin-top: 1em;
+  padding: .5em 1em;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.taskDetails {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.5em; /* Adjust margin as needed */
+  justify-content: space-between;
+  align-items: center;
+  flex-basis: calc(100% - 0.5em); /* Adjust width as needed */
+}
+
+/* Add margin to individual detail items if needed */
+.status{
+  flex-basis: calc(100% - 0.5em); 
+}
+
+.dateInitiated,
+.dateCompleted,
+.completedBy,
+.assigneeEmail,
+.taskName,
+.workflowName {
+  margin-top: 0;
+  flex-basis: calc(50% - 0.5em);
+}
+
+.statusSpan {
+  padding: .5em 1em;
+  border-radius: 3px;
+  display: inline-block;
+  margin-right: auto;
+}
+
+.active {
+  background-color: #B9F3FC;
+}
+
+.expired {
+  background-color: #80558C;
+}
+
+.complete {
+  background-color: #B5F1CC;
+}
+
+.overridden {
+  background-color: #F9B572;
+}
+
+.terminated {
+  background-color: #FF8080;
+}
+
+
+/* base */
+
+.welcome {
+  text-align: center;
+}
+
+.welcomeImage {
+  width: 100%;
+  max-width: 420px;
+}
+
+.links {
+  a {
+    text-decoration: none;
+    color: var(--link);
+
+    &:hover {
+      text-decoration: underline;
+      color: var(--linkHovered);
+    }
+  }
+}
+
+/* Styles for the modal container */
+.confirmationModal {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+  z-index: 1000; /* Adjust the z-index as needed */
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+}
+
+/* Styles for the modal content */
+.modalContent {
+  background-color: #fff; /* Background color for the modal */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Media query for screens up to a certain width (e.g., 768px) */
+@media screen and (max-width: 768px) {
+  .modalContent {
+    width: 80%; /* Adjust the width for smaller screens */
+  }
+}
+
+/* Media query for screens larger than a certain width (e.g., 1200px) */
+@media screen and (min-width: 1200px) {
+  .modalContent {
+    width: 50%; /* Adjust the width for larger screens */
+  }
+}
+
+/* Styles for the modal text */
+.modalContent p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Styles for the modal buttons */
+.modalContent button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Styles for the Confirm button */
+.confirmButton {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+/* Styles for the Cancel button */
+.cancelButton {
+  background-color: #f44336; /* Red */
+  color: white;
 }

@@ -13,6 +13,7 @@
   },
   "externals": {},
   "localizedResources": {
-    "NintexTaskViewerWebPartStrings": "lib/webparts/nintexTaskViewer/loc/{locale}.js"
+    "NintexTaskViewerWebPartStrings": "lib/webparts/nintexTaskViewer/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
   }
 }
